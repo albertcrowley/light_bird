@@ -5,10 +5,12 @@ extern "C" {
 typedef struct {
     char f[8][8];
     int player_x;
+    int gap;
+    int shift;
 } t_field ;
 
 
-t_field create_field(int player_pos);
+t_field create_field(int player_pos, int gap);
 t_field tick(t_field field);
 void field_to_bytes(t_field field, unsigned char* b);
 

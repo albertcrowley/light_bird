@@ -39,22 +39,33 @@ byte a[8]={ B00000000,
             B00000000};
 
 
-const int ANIM_DELAY = 100;
+int ANIM_DELAY = 200;
+int SPEEDUP = 10;
 
 void loop() {
 
-  t_field f = create_field(4);
+  t_field f = create_field(4,6);
 
   drawField(f);
-  int gap = 6;
+  int gap = 7;
   int gap_dir = -1;
+  int shift_delta = 0;
   while (true) {
-    for (int ticks = 0; ticks< 4; ticks++) {
+    for (int ticks = 0; ticks< 5; ticks++) {
       f = tick(f);
+
+      if (shift_delta == 0 || random(0,10)>5) {
+        shift_delta = random(-1,2);
+      }
       
-      add_row(&f, gap, random(-1,2));
+      if (f.shift + f.gap + shift_delta < 2 ) shift_delta++;
+      if (f.shift +f.gap + shift_delta > 8) shift_delta--;
+      add_row(&f, gap, shift_delta);
+
       drawField(f);
-      delay (500);      
+      delay (ANIM_DELAY);      
+
+      if (ANIM_DELAY > SPEEDUP) ANIM_DELAY = ANIM_DELAY-SPEEDUP;
     }
     gap += gap_dir;
 
