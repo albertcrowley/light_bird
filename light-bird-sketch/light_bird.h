@@ -1,3 +1,7 @@
+#ifndef LIGHT_BIRD_H
+#define LIGHT_BIRD_H
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -22,4 +26,6 @@ void add_row(t_field* field, int gap, int shift);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
